@@ -1,0 +1,9 @@
+name: LDHolyExpBottle
+version: 1.0
+main: me.leddev.holyexpbottle.Main
+api-version: '1.16'
+authors: [ConderFix]
+description: Плагин на уникальный бутыли с опытом.
+website: vk.com/conderfix
+commands:
+  ldholybottle:
