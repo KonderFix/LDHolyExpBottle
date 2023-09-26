@@ -43,27 +43,11 @@ public class BukkitListener implements Listener {
                             PersistentDataType.STRING);
                     if (value != null && value.equals("one")) {
                         player.giveExp(plugin.getConfig().getInt("item_bottle_one.value"));
-                        ItemStack itemStack = new ItemStack(Material.EXPERIENCE_BOTTLE, 1);
-                        ItemMeta itemMeta2 = itemStack.getItemMeta();
-                        itemMeta2.setDisplayName(HexUtil.translate(Main.getInstance().getConfig().getString("item_bottle_one.name")));
-                        itemMeta2.addEnchant(Enchantment.OXYGEN, 1, true);
-                        itemMeta2.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-                        itemMeta2.getPersistentDataContainer().set(
-                                NamespacedKey.fromString("bottle_one"),
-                                PersistentDataType.STRING, "one"
-                        );
-
-                        List<String> lore = Main.getInstance().getConfig().getStringList("item_bottle_one.lore");
-                        List<String> translatedLore = new ArrayList<>();
-                        for (String line : lore) {
-                            String translatedLine = HexUtil.translate(line);
-                            translatedLore.add(translatedLine);
+                        player.getInventory().getItemInMainHand().setAmount(0);
+                        boolean message = plugin.getConfig().getBoolean("item_bottle_one.click-exp.enable");
+                        if (message) {
+                            player.sendMessage(HexUtil.translate(plugin.getConfig().getString("item_bottle_one.click-exp.message")));
                         }
-                        itemMeta2.setLore(translatedLore);
-
-                        itemStack.setItemMeta(itemMeta2);
-                        player.getInventory().removeItem(itemStack);
                     }
                 }
             }
@@ -109,6 +93,10 @@ public class BukkitListener implements Listener {
 
                         itemStack.setItemMeta(itemMeta2);
                         player.getInventory().removeItem(itemStack);
+                        boolean message = plugin.getConfig().getBoolean("item_bottle_two.click-exp.enable");
+                        if (message) {
+                            player.sendMessage(HexUtil.translate(plugin.getConfig().getString("item_bottle_two.click-exp.message")));
+                        }
                     }
                 }
             }
@@ -154,6 +142,11 @@ public class BukkitListener implements Listener {
 
                         itemStack.setItemMeta(itemMeta2);
                         player.getInventory().removeItem(itemStack);
+                        boolean message = plugin.getConfig().getBoolean("item_bottle_three.click-exp.enable");
+                        if (message) {
+                            player.sendMessage(HexUtil.translate(plugin.getConfig().getString("item_bottle_three.click-exp.message")));
+                        }
+
                     }
                 }
             }
